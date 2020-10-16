@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chart</title>
+  {% load static %}
+  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic'
+        rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+
+    <!-- Theme CSS - Includes Bootstrap -->
+    <link href="{% static 'css/creative.css' %}" rel="stylesheet">
+</head>
+<body style="background-color:#eef;">
+    <div class="container" >
+      </div>
+      <h1 class="text-uppercase font-weight-bold" style="text-align: center;"> PREDICTED RESULT</h1> 
+      
+              <canvas id="myChart" width="1000" height="400" style="margin-left: 270px; margin-top: 140px;"></canvas>
+      
+              <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+              <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+              <script type="text/javascript">
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
+                  type: 'doughnut',
+                  data: {
+                    labels: {{ label|safe }},
+                    datasets: [{
+                      label: 'Predicted Values',
+                      data: {{ list|safe }},
+                      backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                      ],
+                      borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth:2
+                    }]
+                  },
+                  options: {
+                    responsive: false,
+                    scales: {
+                      xAxes: [{
+                        ticks: {
+                          maxRotation: 90,
+                          minRotation: 30
+                        }
+                      }],
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true
+                        }
+                      }]
+                    }
+                  }
+                });
+              </script>
+</body>
+</html>
